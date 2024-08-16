@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestSpiralMatrixIII(t *testing.T) {
+func TestДemonadeChange(t *testing.T) {
 	var tests = []struct {
 		name   string
 		input  []int
