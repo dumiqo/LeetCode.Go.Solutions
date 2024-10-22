@@ -6,10 +6,10 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
-func postorderTraversal(root TreeNode) []int {
+func postorderTraversal(root *TreeNode) []int {
 	list := make([]int, 0)
 
-	list = inner(&root, list)
+	list = inner(root, list)
 	return list
 }
 
