@@ -5,7 +5,7 @@ func sumGame(num string) bool {
 	topSum, topQ := stat(num[:len(num)/2])
 	bottomSum, bottomQ := stat(num[len(num)/2:])
 
-	return topQ == bottomQ && topSum == bottomSum
+	return false
 }
 
 func stat(num string) (int, int) {
