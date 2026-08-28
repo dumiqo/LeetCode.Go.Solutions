@@ -14,6 +14,10 @@ func TestLexPalindromicPermutation(t *testing.T) {
 		{"Test Case 2", "baba", "bbaa", ""},
 		{"Test Case 3", "abc", "abb", ""},
 		{"Test Case 4", "aac", "aab", "aca"},
+		{"Test Case 5", "b", "a", "b"},
+		{"Test Case 6", "bbz", "aaa", "bzb"},
+		{"Test Case 7", "caca", "baab", "caac"},
+		{"Test Case 8", "aaa", "aab", ""},
 	}
 
 	for _, test := range tests {
