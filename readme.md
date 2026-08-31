@@ -6,3 +6,5 @@
 
 Преложенный вариант с leedCode находит нечетную букву и проверяет можно ли построить полиндром.
 
+## 2058 Find the Minimum and Maximum Number of Nodes Between Critical Points
+**Medium**
