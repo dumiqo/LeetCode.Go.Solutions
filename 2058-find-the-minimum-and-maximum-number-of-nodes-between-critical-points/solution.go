@@ -8,65 +8,49 @@ type ListNode struct {
 }
 
 func nodesBetweenCriticalPoints(head *ListNode) []int {
-	min, max := findCriticalPoints(head)
-	return []int{min, max}
+	if head == nil {
+		return []int{-1, -1}
+	}
+	minDist, maxDist := findCriticalPoints(head)
+	return []int{minDist, maxDist}
 }
 
 func findCriticalPoints(head *ListNode) (int, int) {
-	canFind := true
-	prev := head.Val
-	if head.Next == nil {
+	if head.Next == nil || head.Next.Next == nil {
 		return -1, -1
 	}
-	head = head.Next
-	cur := head.Val
-	if head.Next == nil {
-		return -1, -1
-	}
-	next := head.Next.Val
-	index := 1
 
-	prevIndex := -1
-	firstIndex := -1
-	lastIndex := -1
+	prev := head
+	cur := head.Next
+	next := head.Next.Next
+	index := 1 // индекс текущего узла (cur)
+
+	firstIdx := -1
+	lastIdx := -1
+	prevIdx := -1
 	minDist := math.MaxInt
-	for canFind {
-		if isCritical(prev, cur, next) {
-			if firstIndex == -1 {
-				firstIndex = index
+
+	for next != nil {
+		if (prev.Val < cur.Val && cur.Val > next.Val) ||
+			(prev.Val > cur.Val && cur.Val < next.Val) {
+			if firstIdx == -1 {
+				firstIdx = index
 			} else {
-				dist := index - prevIndex
+				dist := index - prevIdx
 				if dist < minDist {
 					minDist = dist
 				}
 			}
-			prevIndex = index
-			lastIndex = index
-
+			prevIdx = index
+			lastIdx = index
 		}
 
+		prev, cur, next = cur, next, next.Next
 		index++
-		head = head.Next
-		if head.Next == nil {
-			canFind = false
-			break
-		}
-		prev = cur
-		cur = next
-		next = head.Next.Val
 	}
-	if minDist == math.MaxInt {
+
+	if firstIdx == -1 || lastIdx == firstIdx {
 		return -1, -1
 	}
-	return minDist, lastIndex - firstIndex
-}
-
-func isCritical(prev, cur, next int) bool {
-	if prev < cur && cur > next {
-		return true
-	}
-	if prev > cur && cur < next {
-		return true
-	}
-	return false
+	return minDist, lastIdx - firstIdx
 }
