@@ -8,6 +8,30 @@ description: Solve a LeetCode problem in the LeetCode.Go.Solutions Go repository
 This repository is a Go 1.22.5 module (`github.com/dumiqo/LeetCode.Go.Solutions`) that
 collects LeetCode solutions, one folder per problem. `testify` is a declared dependency.
 
+## Mandatory: go-feature workflow + go-development skill
+
+Solve every problem with the **go-feature workflow** and the **go-development** house
+style. Read these global assets in full and follow them:
+
+- Workflow: `C:\Users\Костя\.pi\agent\prompts\go-feature.md`
+- Style: `C:\Users\Костя\.pi\agent\skills\go-development\SKILL.md`
+- Role agents: `C:\Users\Костя\.pi\agent\agents\` (`researcher`, `architect`,
+  `go-developer`, `test-engineer`, `code-reviewer`)
+
+Run the go-feature phases as **sequential subagents** (use the `pi-subagents` skill for
+delegation): researcher (statement + repo reconnaissance), architect (implementation
+plan), go-developer (implement), test-engineer (tests), code-reviewer (independent
+review of the diff). If review finds High/Critical issues, loop back to go-developer,
+then re-run test-engineer and code-reviewer. Never parallelize implementation and
+review. For a tiny single-file problem you may inline a phase when spawning a subagent
+is impractical, but all phases still run in order.
+
+**Where the workflow conflicts with this repository's conventions below, the repo wins**
+(`package leetcode`, plain `testing` over testify, per-folder verification — CRLF line
+endings and known pre-existing failures make repo-wide `gofmt -l` / `go test ./...`
+runs noisy — and re-declared local types instead of shared packages). The go-feature
+phases and `go-development` govern everything else.
+
 ## Non-negotiable conventions
 
 Every solution lives in its **own directory** and declares **`package leetcode`**
